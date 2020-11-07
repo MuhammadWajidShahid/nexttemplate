@@ -5,7 +5,6 @@ import Link from '../src/Link';
 
 export const Layout = ({ children }) => {
     const [session, loading] = useSession()
-
     return (
         <>
             <AppBar position="static">

@@ -1,11 +1,15 @@
 import MaterialTable from "material-table";
-import { getSession } from "next-auth/client";
+import { getSession, signIn, useSession } from "next-auth/client";
 import api from "../src/api";
 import redirect from "../src/redirect";
 
-export default function Order({ session, data }) {
-    if (!session)
+export default function Order({ data }) {
+    const [session, loading] = useSession();
+    if (!session) {
+        if (window)
+            signIn()
         return <div>protected</div>
+    }
     return (
         <div style={{ maxWidth: '70%', margin: "0 auto", padding: "15px" }}>
             <MaterialTable
@@ -22,7 +26,6 @@ export default function Order({ session, data }) {
 }
 export async function getServerSideProps(context) {
     const session = await getSession(context)
-    console.log(context.req.url)
     if (!session)
         await redirect(context, `/api/auth/signin?callbackUrl=${process.env.NEXTAUTH_URL}${encodeURIComponent(context.req.url)}`)
     let data = null;

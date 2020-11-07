@@ -23,6 +23,7 @@ const options = {
                         'Content-Type': 'application/json'
                     }
                 })
+                console.log("called",res.status)
                 if (res.ok) {
                     // Any object returned will be saved in `user` property of the JWT
                     const api_key = await res.json();

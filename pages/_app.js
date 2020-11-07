@@ -27,11 +27,11 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-          <Provider session={pageProps.session}>
-        <Layout>
+        <Provider session={pageProps.session}>
+          <Layout>
             <Component {...pageProps} />
-        </Layout>
-          </Provider>
+          </Layout>
+        </Provider>
       </ThemeProvider>
     </React.Fragment>
   );
