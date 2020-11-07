@@ -2,9 +2,8 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import ProTip from '../src/ProTip';
 import Link from '../src/Link';
-import Copyright from '../src/Copyright';
+
 
 export default function Index() {
   return (
@@ -16,9 +15,14 @@ export default function Index() {
         <Link href="/about" color="secondary">
           Go to the about page
         </Link>
-        <ProTip />
-        <Copyright />
       </Box>
     </Container>
   );
 }
+// export async function getServerSideProps(context) {
+//   const session = await getSession(context)
+//   console.log(session)
+//   return {
+//       props: { session }
+//   }
+// }
