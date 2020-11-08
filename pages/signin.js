@@ -30,10 +30,7 @@ export default function SignIn() {
     e.preventDefault()
     try {
       setLoading(true);
-      const res = await api.signIn(null, "/auth/login", {
-        email: "bruno@email.com",
-        password: "bruno"
-      })
+      const res = await api.signIn(null, "/auth/login", formData)
       if (res?.statusText === "OK") {
         Router.push(cb || "/");
       }
@@ -53,7 +50,7 @@ export default function SignIn() {
 
       <form onSubmit={HandleSumbit} onChange={handleChange} className={classes.signIn}>
         {
-          error && <div>
+          error && <div style={{ color: "red" }}>
             Email or Password is incorrect
   </div>
         }
