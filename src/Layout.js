@@ -4,11 +4,16 @@ import { makeStyles } from '@material-ui/core/styles'
 import Link from '../src/Link';
 import api from './api';
 import getUser from './useAuth/client';
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     activeLink: {
         textDecoration: "underline"
+    },
+    footer:{
+        height:"200px",
+        backgroundColor:theme.palette.primary.main,
+        width:"100%"
     }
-});
+}));
 export const Layout = ({ children }) => {
     const classes = useStyles();
     const [user, loading] = getUser()
@@ -22,29 +27,33 @@ export const Layout = ({ children }) => {
                             News
                 </Typography>
                     </Link>
-                    <Link href="/dashboard" color="inherit" activeClassName={classes.activeLink}>
+                    {user && <>
+                        <Link href="/dashboard" color="inherit" activeClassName={classes.activeLink}>
 
-                        Dashobard
+                            Dashobard
                   </Link>
-                    <Link href="/orders" color="inherit" activeClassName={classes.activeLink}>
-                        Orders
+                        <Link href="/orders" color="inherit" activeClassName={classes.activeLink}>
+                            Orders
                   </Link>
-                    <Link href="/account" color="inherit" activeClassName={classes.activeLink}>
-                        Account
+                        <Link href="/account" color="inherit" activeClassName={classes.activeLink}>
+                            Account
                    </Link>
+                        <Link href="#" color="inherit" onClick={signOut} activeClassName={classes.activeLink}>
+                            Sign out
+                    </Link>
+                    </>}
                     {!user && <>
                         <Link href="/signin" color="inherit" activeClassName={classes.activeLink}>
                             Sign In
                     </Link>
                     </>}
-                    {user && <>
-                        <Link href="#" color="inherit" onClick={signOut} activeClassName={classes.activeLink}>
-                            Sign out
-                    </Link>
-                    </>}
+
                 </Toolbar>
             </AppBar>
             {children}
+            <div className={classes.footer}>
+
+            </div>
         </>
     )
 }
