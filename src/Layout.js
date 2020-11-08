@@ -1,34 +1,46 @@
 import React from 'react'
-import { AppBar, Button, Toolbar, Typography } from '@material-ui/core';
-import { signIn, signOut, useSession } from 'next-auth/client';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles'
 import Link from '../src/Link';
-
+import api from './api';
+import getUser from './useAuth/client';
+const useStyles = makeStyles({
+    activeLink: {
+        textDecoration: "underline"
+    }
+});
 export const Layout = ({ children }) => {
-    const [session, loading] = useSession()
+    const classes = useStyles();
+    const [user, loading] = getUser()
+    const signOut = () => api.signOut();
     return (
         <>
             <AppBar position="static">
                 <Toolbar style={{ gap: "20px" }}>
-                    <Link href="/" color="inherit" style={{ flexGrow: 1 }}>
+                    <Link href="/" color="inherit" activeClassName={classes.activeLink}>
                         <Typography variant="h6" >
                             News
-    </Typography>
+                </Typography>
                     </Link>
-                    <Link href="/dashboard" color="inherit" >
-                        Dashobard
-  </Link>
-                    <Link href="/order" color="inherit" >
-                        Order
-  </Link>
-                    <Link href="/account" color="inherit" >
-                        Account
-  </Link>
-                    {!session && <>
-                        <Button color="secondary" variant="contained" onClick={signIn} >Sign In</Button>
-                    </>}
-                    {session && <>
-                        <Button color="secondary" variant="contained" onClick={signOut} >Sign out</Button>
+                    <Link href="/dashboard" color="inherit" activeClassName={classes.activeLink}>
 
+                        Dashobard
+                  </Link>
+                    <Link href="/orders" color="inherit" activeClassName={classes.activeLink}>
+                        Orders
+                  </Link>
+                    <Link href="/account" color="inherit" activeClassName={classes.activeLink}>
+                        Account
+                   </Link>
+                    {!user && <>
+                        <Link href="/signin" color="inherit" activeClassName={classes.activeLink}>
+                            Sign In
+                    </Link>
+                    </>}
+                    {user && <>
+                        <Link href="#" color="inherit" onClick={signOut} activeClassName={classes.activeLink}>
+                            Sign out
+                    </Link>
                     </>}
                 </Toolbar>
             </AppBar>
