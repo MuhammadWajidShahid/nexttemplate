@@ -70,7 +70,14 @@ const options = {
             if (isSignIn) { token.api_key = user.api_key }
             return Promise.resolve(token)
         }
-    }
+    },
+    // pages: {
+    //     signIn: '/signin',
+    //     // signOut: '/auth/signout',
+    //     // error: '/auth/error', // Error code passed in query string as ?error=
+    //     // verifyRequest: '/auth/verify-request', // (used for check email message)
+    //     // newUser: null // If set, new users will be directed here on first sign in
+    //   }
 }
 
 export default (req, res) => NextAuth(req, res, options)

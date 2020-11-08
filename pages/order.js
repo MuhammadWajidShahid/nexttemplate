@@ -5,7 +5,7 @@ import redirect from "../src/redirect";
 
 export default function Order({ data }) {
     const [session, loading] = useSession();
-    if (!session) {
+    if (!session && !loading) {
         if (window)
             signIn()
         return <div>protected</div>
