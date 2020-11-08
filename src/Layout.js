@@ -8,10 +8,10 @@ const useStyles = makeStyles(theme => ({
     activeLink: {
         textDecoration: "underline"
     },
-    footer:{
-        height:"200px",
-        backgroundColor:theme.palette.primary.main,
-        width:"100%"
+    footer: {
+        height: "200px",
+        backgroundColor: theme.palette.primary.main,
+        width: "100%"
     }
 }));
 export const Layout = ({ children }) => {
@@ -27,17 +27,17 @@ export const Layout = ({ children }) => {
                             News
                 </Typography>
                     </Link>
-                    {user && <>
-                        <Link href="/dashboard" color="inherit" activeClassName={classes.activeLink}>
+                    <Link href="/dashboard" color="inherit" activeClassName={classes.activeLink}>
 
-                            Dashobard
+                        Dashobard
                   </Link>
-                        <Link href="/orders" color="inherit" activeClassName={classes.activeLink}>
-                            Orders
+                    <Link href="/orders" color="inherit" activeClassName={classes.activeLink}>
+                        Orders
                   </Link>
-                        <Link href="/account" color="inherit" activeClassName={classes.activeLink}>
-                            Account
+                    <Link href="/account" color="inherit" activeClassName={classes.activeLink}>
+                        Account
                    </Link>
+                    {user && <>
                         <Link href="#" color="inherit" onClick={signOut} activeClassName={classes.activeLink}>
                             Sign out
                     </Link>

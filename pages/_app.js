@@ -7,8 +7,7 @@ import theme from '../src/theme';
 import { Layout } from '../src/Layout';
 
 export default function MyApp(props) {
-  const { Component, pageProps } = props;
-
+  const { Component, pageProps, router } = props;
   React.useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
@@ -26,9 +25,13 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
+        {
+          router.pathname === "/signin" &&
+          <Component {...pageProps} /> ||
           <Layout>
             <Component {...pageProps} />
           </Layout>
+        }
       </ThemeProvider>
     </React.Fragment>
   );
